@@ -55,10 +55,11 @@ func main() {
 	var total int
 
 	for _, item := range split {
-		// below if addresses an empty last item
-		if item == split[len(split)-1] {
+		// below if block, addresses an empty last item
+		if item == split[len(split)-1] && len(split) > 100 {
 			break
 		}
+
 		opponent = getHand(string(item[0]))
 		player = getHand(string(item[2]))
 		switch player {
@@ -90,5 +91,68 @@ func main() {
 		}
 		total += score
 	}
-	fmt.Println(total)
+	fmt.Println("Part One: ", total)
+	partTwo(split)
+}
+
+func getResult(item string) string {
+	var result string
+	switch item {
+	case "X":
+		result = "lose"
+	case "Y":
+		result = "draw"
+	case "Z":
+		result = "win"
+	}
+	return result
+}
+
+func partTwo(list []string) {
+	var opponent string
+	var result string
+	var score int
+	var total int
+
+	for _, item := range list {
+		// below if block, addresses an empty last item
+		if item == list[len(list)-1] && len(list) > 100 {
+			break
+		}
+
+		opponent = getHand(string(item[0]))
+		result = getResult(string(item[2]))
+
+		rock := 1
+		paper := 2
+		scissor := 3
+
+		if opponent == "rock" {
+			if result == "draw" {
+				score = 3 + rock
+			} else if result == "win" {
+				score = 6 + paper
+			} else {
+				score = scissor
+			}
+		} else if opponent == "paper" {
+			if result == "draw" {
+				score = 3 + paper
+			} else if result == "win" {
+				score = 6 + scissor
+			} else {
+				score = rock
+			}
+		} else if opponent == "scissor" {
+			if result == "draw" {
+				score = 3 + scissor
+			} else if result == "win" {
+				score = 6 + rock
+			} else {
+				score = paper
+			}
+		}
+		total += score
+	}
+	fmt.Println("Part Two: ", total)
 }
