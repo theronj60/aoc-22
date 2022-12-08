@@ -34,7 +34,8 @@ func main() {
 
 	newArray := getNew(split)
 	
-	var count int
+	var pairs int
+	var overlap int
 
 	for _, item := range newArray {
 		x1, _ := strconv.Atoi(string(item[0]))
@@ -43,8 +44,13 @@ func main() {
 		y2, _ := strconv.Atoi(string(item[3]))
 
 		if x1 <= y1 && x2 >= y2 || y1 <= x1 && y2 >= x2 {
-			count++
+			pairs++
 		}
+		if y2 < x1 || x2 < y1 {
+			continue
+		}
+		overlap++
 	}
-	fmt.Println("part one: ", count)
+	fmt.Println("part one: ", pairs)
+	fmt.Println("part two: ", overlap)
 }
