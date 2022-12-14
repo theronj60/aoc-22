@@ -38,6 +38,7 @@ func main() {
 	var overlap int
 
 	for _, item := range newArray {
+		fmt.Println(item)
 		x1, _ := strconv.Atoi(string(item[0]))
 		x2, _ := strconv.Atoi(string(item[1]))
 		y1, _ := strconv.Atoi(string(item[2]))
